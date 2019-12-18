@@ -14,3 +14,6 @@ Because I've made local changes that I want to both save and share. Also, becaus
 
 ## How To Run This Sample?
 Check instructions here https://github.com/Azure-Samples/active-directory-b2c-dotnetcore-webapp/blob/master/README.md
+
+## Versions used
+I built this code with Visual Studio 2019 and dotnet core 2.2 
