@@ -33,7 +33,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: PublishPipelineArtifact@1
+- task: PublishBuildArtifacts@1
   inputs:
-    path: '$(System.DefaultWorkingDirectory)/bin/$(buildConfiguration)'
-    artifact: WebApp
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'WebApp' 
