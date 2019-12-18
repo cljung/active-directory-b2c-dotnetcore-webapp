@@ -2,10 +2,11 @@
 clone of https://github.com/Azure-Samples/active-directory-b2c-dotnetcore-webapp
 
 ## Why did I clone it?
-Because I've made local changes that I want to both save and share. Also, because when you work with B2C Custom Policies you need a WebApp to test them with.
+Because I've made local changes that I want to both save, reuse and share. Also, because when you work with B2C Custom Policies you need a WebApp to test them with.
 
 ## What are the changes?
 - appsettinbgs.json can hold multiple configurations and you just change the value of AzureAdB2C-Config to point to which config you want to work with
+- changed Startup.cs so that appsettings.json loads optionally and you therefor can override with values in appsettings.Development.json, etc
 - More B2C Policy options, like ability to test Sign-up and Sign-in separatly, Change password and Forgot Password separatly.
 - Change on index page so that it shows relevant info and links about B2C 
 - Drop down menu with options after you have signed in
