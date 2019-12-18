@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "B2C Demo";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/azureadb2c-overview.png" alt="ASP.NET" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    What is Azure AD B2C?
+                    <a class="btn btn-default" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-overview">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/external-idps.png" alt="Visual Studio" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Find out how to use External Identity Providers with Azure AD B2C
+                    <a class="btn btn-default" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-custom-setup-li-idp">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/scenario-idproofing.png" alt="Package Management" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Learn about the technical feature overview
+                    <a class="btn btn-default" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/technical-overview">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/custom-policy.png" alt="Microsoft Azure" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Discover the rich github samples for Custom Policies
+                    <a class="btn btn-default" href="https://github.com/azure-ad-b2c/samples">
+                        Learn More
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+ 
+<div class="row">
+    <div class="col-md-3">
+        <h2>Documentation</h2>
+        <ul>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-overview" target="_blank">What is Azure AD B2C?</a></li>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-protocols" target="_blank">Authentication Protocols</a></li>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-get-started-custom" target="_blank">Custom Policies</a></li>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-custom-rest-api-netfw" target="_blank">Integrate with REST APIs</a></li>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-setup-aad-custom" target="_blank">Federate with Azure AD</a></li>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-configure-signup-self-asserted-custom" target="_blank">UX Customization</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>github</h2>
+        <ul>
+            <li><a class="index-link" href="https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack" target="_blank">Custom Policy Starter Pack</a></li>
+            <li><a class="index-link" href="https://github.com/azure-ad-b2c/samples" target="_blank">Custom Policy samples</a></li>
+            <li><a class="index-link" href="https://github.com/azure-ad-b2c/ief-wiki/wiki" target="_blank">IEF Wiki</a></li>
+            <li><a class="index-link" href="https://docs.microsoft.com/en-us/azure/active-directory-b2c/code-samples" target="_blank">Code Samples</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Demos</h2>
+        <ul>
+            <li><a class="index-link" href="https://aka.ms/ciamdemo" target="_blank">WoodGrove Groceries</a></li>
+            <li><a class="index-link" href="https://aka.ms/ciamdemoconfig" target="_blank">WoodGrove Groceries config page</a></li>
+            <li><a class="index-link" href="https://github.com/Azure-Samples/active-directory-external-identities-woodgrove-demo" target="_blank">WoodGrove Groceries source</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>References</h2>
+        <ul>
+            <li><a class="index-link" href="https://www.dsb.dk" target="_blank">DSB - Danish Railroads</a></li>
+            <li><a class="index-link" href="https://www.mygovid.ie/" target="_blank">MyGovId - eID in Ireland</a></li>
+            <li><a class="index-link" href="https://www.subway.com/" target="_blank">Subway</a></li>
+            <li><a class="index-link" href="https://www.singaporeair.com/" target="_blank">Singapore Airlines</a></li>
+            <li><a class="index-link" href="https://www.filmstaden.se/" target="_blank">Filmstaden</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Videos</h2>
+        <ul>
+            <li><a class="index-link" href="https://www.youtube.com/watch?v=fbSVgC8nGz4" target="_blank">Auth Fundamentals - Basics</a></li>
+            <li><a class="index-link" href="https://www.youtube.com/watch?v=tCNcG1lcCHY" target="_blank">Autn Fundamentals - WebApps</a></li>
+            <li><a class="index-link" href="https://www.youtube.com/watch?v=GmBKlXED9Ug" target="_blank">What is Azure AD B2C?</a></li>            
+        </ul>
+    </div>
+</div>

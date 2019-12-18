@@ -1,0 +1,23 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "https://localhost:44316/",
+      "sslPort": 44316
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "Authentication:B2C-BDO-Local:SignUpPolicyId": "B2C_1A_babbad",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "WebApp-OpenIDConnect-DotNet": {
+      "commandName": "Project"
+    }
+  }
+}

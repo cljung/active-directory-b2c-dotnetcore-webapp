@@ -1,0 +1,31 @@
+﻿@using System.Security.Claims
+
+@if (User.Identity.IsAuthenticated)
+{    
+    <div class="nav navbar-nav navbar-right dropdown">
+
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                @User.Identity.Name (@User.Claims.Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Select(c => c.Value).SingleOrDefault())
+                <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a asp-area="" asp-controller="Session" asp-action="EditProfile">Edit Profile</a></li>
+            <li><a asp-area="" asp-controller="Session" asp-action="ResetPassword">Change Password</a></li>
+            <li class="dropdown-divider"><a href="#"/></li>
+            <li><a asp-area="" asp-controller="Session" asp-action="SignOut">Sign out</a></li>
+        </ul>
+    </div>
+    <!--
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Session" asp-action="EditProfile">@User.Identity.Name (@User.Claims.Where(c => c.Type == "signInName").Select(c => c.Value).SingleOrDefault())</a></li>
+        <li><a asp-area="" asp-controller="Session" asp-action="ResetPassword">Reset Password</a></li>
+        <li><a asp-area="" asp-controller="Session" asp-action="SignOut">Sign out</a></li>
+    </ul>
+    -->
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Session" asp-action="SignIn">Sign in</a></li>
+    </ul>
+}
