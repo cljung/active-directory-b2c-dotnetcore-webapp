@@ -59,9 +59,9 @@ namespace WebApp_OpenIDConnect_DotNet
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             // for dotnet core 2.2. Doesn't work in 3.0
-            loggerFactory.AddConsole();
+            //loggerFactory.AddConsole();
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            //loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {

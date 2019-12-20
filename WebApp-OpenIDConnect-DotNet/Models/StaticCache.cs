@@ -12,12 +12,12 @@ namespace WebApp_OpenIDConnect_DotNet.Models
     /// </summary>
     public class MSALStaticCache
     {
-        private static Dictionary<string, byte[]> staticCache = new Dictionary<string, byte[]>();
+        private static readonly Dictionary<string, byte[]> staticCache = new Dictionary<string, byte[]>();
 
-        private static ReaderWriterLockSlim SessionLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+        private static readonly ReaderWriterLockSlim SessionLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
         private readonly string userId = string.Empty;
         private readonly string cacheId = string.Empty;
-        private readonly HttpContext httpContext = null;
+        private HttpContext httpContext = null;
         private ITokenCache cache;
 
         public MSALStaticCache(string userId, HttpContext httpcontext)

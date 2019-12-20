@@ -92,13 +92,14 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
         [HttpGet]
         public IActionResult SignedOut()
         {
-            if (User.Identity.IsAuthenticated)
-            {
+            // always redirect to home page after sign out. The SignedOut page is of no use
+            //if (User.Identity.IsAuthenticated)
+            //{
                 // Redirect to home page if the user is authenticated.
                 return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
+            //}
 
-            return View();
+            //return View();
         }
     }
 }

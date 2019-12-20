@@ -18,7 +18,7 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
 {
     public class HomeController : Controller
     {
-        AzureAdB2COptions AzureAdB2COptions;
+        readonly AzureAdB2COptions AzureAdB2COptions;
         public HomeController(IOptions<AzureAdB2COptions> azureAdB2COptions)
         {
             AzureAdB2COptions = azureAdB2COptions.Value;
@@ -46,7 +46,7 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
         [Authorize]
         public async Task<IActionResult> Api()
         {
-            string responseString = "";
+            string responseString;
             try
             {
                 // Retrieve the token with the specified scopes
@@ -55,6 +55,7 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
 
                 IConfidentialClientApplication cca =
                 ConfidentialClientApplicationBuilder.Create(AzureAdB2COptions.ClientId)
+                    .WithLogging(MyLoggingMethod, LogLevel.Verbose, enablePiiLogging: false, enableDefaultPlatformLogging: true)
                     .WithRedirectUri(AzureAdB2COptions.RedirectUri)
                     .WithClientSecret(AzureAdB2COptions.ClientSecret)
                     .WithB2CAuthority(AzureAdB2COptions.Authority)
@@ -65,11 +66,17 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
                 AuthenticationResult result = await cca.AcquireTokenSilent(scope, accounts.FirstOrDefault())
                     .ExecuteAsync();
 
+                if ( result.AccessToken == null )
+                {
+                    ViewData["Title"] = "JWT Token Problem"; 
+                    ViewData["Payload"] = "The current user session does not have a valid access_token. Most likely the scopes do not match the App registration.";
+                    return View();
+                }
                 HttpClient client = new HttpClient();
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, AzureAdB2COptions.ApiUrl);
 
                 // Add token to the Authorization header and make the request
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken );
                 HttpResponseMessage response = await client.SendAsync(request);
 
                 // Handle the response
@@ -85,6 +92,7 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
                         responseString = $"Error calling API. StatusCode=${response.StatusCode}";
                         break;
                 }
+                client.Dispose();
             }
             catch (MsalUiRequiredException ex)
             {
@@ -104,5 +112,18 @@ namespace WebApp_OpenIDConnect_DotNet.Controllers
             ViewBag.Message = message;
             return View();
         }
-    }
-}
+        void MyLoggingMethod(LogLevel level, string message, bool containsPii)
+        {
+            if (containsPii)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"MSAL {level} {containsPii} {message}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"MSAL {level} {containsPii} {message}");
+            }
+        }
+    } // cls
+} // ns
