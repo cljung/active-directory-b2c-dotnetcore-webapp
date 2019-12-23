@@ -29,12 +29,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- script: copy $(scriptSourceLocation) $(Build.ArtifactStagingDirectory)
+  displayName: 'Copy deployment scripts to ArtifactStagingDirectory'
+  continueOnError: false
+  
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'WebApp' 
-  continueOnError: false
-
-- script: copy $(scriptSourceLocation) $(Build.ArtifactStagingDirectory)
-  displayName: 'Copy deployment scripts to ArtifactStagingDirectory'
   continueOnError: false
