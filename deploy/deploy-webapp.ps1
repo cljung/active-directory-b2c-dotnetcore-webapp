@@ -11,31 +11,31 @@ param (
 
 $ErrorActionPreference = "Stop"    
 
-$rg = Get-AzureRmResourceGroup -Name $ResourceGroupName -ErrorAction SilentlyContinue
+$rg = Get-AzResourceGroup -Name $ResourceGroupName -ErrorAction SilentlyContinue
 if ( $null -eq $rg) {
     write-host "Creating ResourceGroup $ResourceGroupName in $Location"
-    $rg = New-AzureRmResourceGroup -Name $ResourceGroupName -Location $location
+    $rg = New-AzResourceGroup -Name $ResourceGroupName -Location $location
     $Location = $rg.Location
 }
 
-$plan = Get-AzureRmAppServicePlan -Name $AppServicePlan -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
+$plan = Get-AzAppServicePlan -Name $AppServicePlan -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
 if ( $null -eq $plan ) {
     write-host "Creating AppServicePlan $AppServicePlan"
-    $plan = New-AzureRmAppServicePlan -Name $AppServicePlan -Location $location -ResourceGroupName $ResourceGroupName -Tier $Tier
+    $plan = New-AzAppServicePlan -Name $AppServicePlan -Location $location -ResourceGroupName $ResourceGroupName -Tier $Tier
 }
 
-$webapp = Get-AzureRmWebApp -Name $WebAppName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
+$webapp = Get-AzWebApp -Name $WebAppName -ResourceGroupName $ResourceGroupName -ErrorAction SilentlyContinue
 if ( $null -eq $webapp ) {
     write-host "Creating AppService $WebAppName"
-    $webapp = New-AzureRMWebApp -ResourceGroupName $ResourceGroupName -AppServicePlan $AppServicePlan -Name $WebAppName
+    $webapp = New-AzWebApp -ResourceGroupName $ResourceGroupName -AppServicePlan $AppServicePlan -Name $WebAppName
     write-host "Setting AppService runtime to .Net Core"
-    New-AzureRmResource -ResourceGroupName $ResourceGroupName -ResourceType "Microsoft.Web/sites/config" -ResourceName "$WebAppName/metadata" -ApiVersion 2018-02-01 -Force -PropertyObject @{"CURRENT_STACK"="dotnetcore"}
-    $app = Get-AzureRmResource -ResourceGroupName $ResourceGroupName -ResourceType "Microsoft.Web/sites" -Name $webAppName
+    New-AzResource -ResourceGroupName $ResourceGroupName -ResourceType "Microsoft.Web/sites/config" -ResourceName "$WebAppName/metadata" -ApiVersion 2018-02-01 -Force -PropertyObject @{"CURRENT_STACK"="dotnetcore"}
+    $app = Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType "Microsoft.Web/sites" -Name $webAppName
     if( $app.Properties.httpsOnly -eq $False)
     {
         write-host "Setting AppService HTTPS only"
         $app.Properties.httpsOnly = $True
-        $app | Set-AzureRmResource -Force
+        $app | Set-AzResource -Force
     }
 }
 
@@ -47,7 +47,7 @@ ForEach ($item in $appSettings) {
 }
 
 if( $AppInsightsName -ne '') {
-    $AppInsights = Get-AzureRmApplicationInsights | Where-Object {$_.Name -eq $AppInsightsName}
+    $AppInsights = Get-AzApplicationInsights | Where-Object {$_.Name -eq $AppInsightsName}
     if( $AppInsights.Count -ne 0 ) 
     {
         Write-Host "Adding ApplicationInsights $AppInsightsName..."
@@ -68,12 +68,12 @@ if ( $null -ne $ConfigParams ) {
     #>
 }
 
-Set-AzureRmWebApp -Name $WebAppName -ResourceGroupName $ResourceGroupName -AppSettings $newAppSettings
+Set-AzWebApp -Name $WebAppName -ResourceGroupName $ResourceGroupName -AppSettings $newAppSettings
 
 if ( $True -eq $AlwaysOn ) {
     write-host "Setting AlwaysOn to True..."
-    $webapp = Get-AzureRmWebApp -Name $WebAppName -ResourceGroupName $ResourceGroupName
+    $webapp = Get-AzWebApp -Name $WebAppName -ResourceGroupName $ResourceGroupName
     $webapp.SiteConfig.AlwaysOn = $AlwaysOn
-    $webapp | Set-AzureRmWebApp
+    $webapp | Set-AzWebApp
 }
 
