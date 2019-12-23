@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  scriptSourceLocation: 'deploy\*.*'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -28,12 +29,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'WebApp' 
+  continueOnError: false
+
+- script: copy $(scriptSourceLocation) $(Build.ArtifactStagingDirectory)
+  displayName: 'Copy deployment scripts to ArtifactStagingDirectory'
+  continueOnError: false
