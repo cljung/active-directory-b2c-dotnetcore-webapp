@@ -67,7 +67,7 @@ namespace WebApp_OpenIDConnect_DotNet
                     !policy.Equals(defaultPolicy))
                 {
                     context.ProtocolMessage.Scope = OpenIdConnectScope.OpenIdProfile;
-                    context.ProtocolMessage.ResponseType = OpenIdConnectResponseType.Token; 
+                    context.ProtocolMessage.ResponseType = OpenIdConnectResponseType.IdToken; 
                     context.ProtocolMessage.IssuerAddress = context.ProtocolMessage.IssuerAddress.ToLower().Replace(defaultPolicy.ToLower(), policy.ToLower());
                     context.Properties.Items.Remove(AzureAdB2COptions.PolicyAuthenticationProperty);
                 }
