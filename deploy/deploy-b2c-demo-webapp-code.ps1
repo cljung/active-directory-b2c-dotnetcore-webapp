@@ -1,7 +1,7 @@
 param (
     [Parameter(Mandatory=$True)][Alias('r')][string]$ResourceGroupName = "",
     [Parameter(Mandatory=$True)][Alias('n')][string]$WebAppName = "",
-    [Parameter(Mandatory=$True)][Alias('n')][string]$ArchivePath = ""    
+    [Parameter(Mandatory=$True)][Alias('p')][string]$ArchivePath = ""    
 )
 
 write-host "Deploying $ArchivePath to $WebAppName..."
