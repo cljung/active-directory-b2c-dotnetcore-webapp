@@ -1,6 +1,8 @@
 param (
     [Parameter(Mandatory=$True)][Alias('r')][string]$ResourceGroupName = "",
-    [Parameter(Mandatory=$True)][Alias('n')][string]$WebAppName = ""
+    [Parameter(Mandatory=$True)][Alias('n')][string]$WebAppName = "",
+    [Parameter(Mandatory=$True)][Alias('n')][string]$ArchivePath = ""    
 )
 
-Publish-AzWebapp -ResourceGroupName $ResourceGroupName -Name $WebAppName -ArchivePath .\WebApp.zip -Force
+write-host "Deploying $ArchivePath to $WebAppName..."
+Publish-AzWebapp -ResourceGroupName $ResourceGroupName -Name $WebAppName -ArchivePath $ArchivePath -Force
